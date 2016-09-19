@@ -10,7 +10,7 @@ namespace QuickSort
     {
         static void Main(string[] args)
         {
-            int countOfElements = 10;
+            int countOfElements = 5;
             int[] arrayToSort = RandomNumbersArray(countOfElements);
             Console.WriteLine(OutputString(arrayToSort));
             int indexOfFirstElement = 0, indexOfLastElement = countOfElements - 1;
@@ -48,10 +48,14 @@ namespace QuickSort
             {
                 if (arrayToSort[j].CompareTo(arrayToSort[indexOfLastElement]) <= 0)
                 {
-                    T temp = arrayToSort[i];
-                    arrayToSort[i] = arrayToSort[j];
-                    arrayToSort[j] = temp;
+                    if (i != j)
+                    {
+                        T temp = arrayToSort[i];
+                        arrayToSort[i] = arrayToSort[j];
+                        arrayToSort[j] = temp;
+                    }
                     i++;
+
                 }
             }
             return i - 1;
