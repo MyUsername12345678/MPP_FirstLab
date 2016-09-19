@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QuickSort
 {
-    class QuickSort
+    public class QuickSortProgram
     {
         static void Main(string[] args)
         {
@@ -14,7 +14,8 @@ namespace QuickSort
             int[] arrayToSort = RandomNumbersArray(countOfElements);
             Console.WriteLine(OutputString(arrayToSort));
             int indexOfFirstElement = 0, indexOfLastElement = countOfElements - 1;
-            QuickSortAlgorithm<int>(arrayToSort, indexOfFirstElement, indexOfLastElement);
+            QuickSortAlgorithm<int> sorter = new QuickSortAlgorithm<int>();
+            sorter.Sorting(arrayToSort, indexOfFirstElement, indexOfLastElement);
             Console.WriteLine(OutputString(arrayToSort));
             Console.Read();
         }
@@ -35,7 +36,12 @@ namespace QuickSort
             return resultArray;
         }
 
-        static int Partition<T>(T[] arrayToSort, int indexOfFirstElement, int indexOfLastElement) where T : IComparable<T>
+    }
+
+    public class QuickSortAlgorithm<T> where T : IComparable
+    {
+
+        private int Partition(T[] arrayToSort, int indexOfFirstElement, int indexOfLastElement)
         {
             int i = indexOfFirstElement;
             for (int j = indexOfFirstElement; j <= indexOfLastElement; j++)
@@ -51,13 +57,12 @@ namespace QuickSort
             return i - 1;
         }
 
-        static void QuickSortAlgorithm<T>(T[] arrayToSort, int indexOfFirstElement, int indexOfLastElement) where T : IComparable<T>
+        public void Sorting(T[] arrayToSort, int indexOfFirstElement, int indexOfLastElement)
         {
             if (indexOfFirstElement >= indexOfLastElement) return;
             int c = Partition(arrayToSort, indexOfFirstElement, indexOfLastElement);
-            QuickSortAlgorithm(arrayToSort, indexOfFirstElement, c - 1);
-            QuickSortAlgorithm(arrayToSort, c + 1, indexOfLastElement);
+            Sorting(arrayToSort, indexOfFirstElement, c - 1);
+            Sorting(arrayToSort, c + 1, indexOfLastElement);
         }
-
     }
 }
